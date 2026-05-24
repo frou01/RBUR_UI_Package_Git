@@ -16,6 +16,12 @@ namespace frou01.RBUR_UI
         [SerializeField] float Open_Position;
         [SerializeField] float Close_Position;
 
+        public override void PostProcessOnBuildProcess()
+        {
+            base.PostProcessOnBuildProcess();
+            GAC_Controller.controllerTransform.localRotation = Quaternion.identity;
+            GAC_Controller.controllerTransform.localPosition = Vector3.zero;
+        }
         public void GAC_OpenPos()
         {
             GAC_Controller.SetPosition(Open_Position);

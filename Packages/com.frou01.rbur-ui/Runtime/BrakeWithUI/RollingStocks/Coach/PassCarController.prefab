@@ -88,10 +88,10 @@ MonoBehaviour:
   train: {fileID: 0}
   straightBrakePressure:
   - 0
+  UseLegacyPipeState: 1
   BrakeOpenF: 0
   BrakeOpenB: 0
   indicateAnimator: {fileID: 0}
-  indicateUdons: []
   brakeFactor:
   - 0
   SupportTankSize: 0.05
@@ -110,13 +110,14 @@ MonoBehaviour:
   refill_sensitivity: 0.01
   release_sensitivity: 0.005
   releaseLap_sensitivity: 0.005
-  immiBrakeLap_sensitivity: 0.005
-  immiBrake_sensitivity: 0.01
+  immiBrakeLap_sensitivity: 0.01
+  immiBrake_sensitivity: 0.02
+  immeBrakeLap_sensitivity: 0.01
+  immeBrake_sensitivity: 0.02
   brake_sensitivity: 0.025
   emer_refill_sensitivity: 0.005
   emer_release_sensitivity: 0.005
   emer_sensitivity: 0.01
-  emer_sensitivity_2: 0.1
   StaticFriction: 1020
   DynamicFriction: 61
   DynamicFrictionSpeed: 0.5
@@ -124,7 +125,6 @@ MonoBehaviour:
   - 0
   controlledWheel: []
   wheelMultiplier: []
-  EmerValve: {fileID: 7510675026738230917}
   HandBrakeScrew: {fileID: 4698206387624090022}
   HandBrakeController: {fileID: 0}
   handBrakePower: 10000
@@ -437,10 +437,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5330118122516921275, guid: 8dac124d1e32a6f43a043301b545775f, type: 3}
-      propertyPath: TargetAnimator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5330118122516921275, guid: 8dac124d1e32a6f43a043301b545775f, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 5330118122516921275, guid: 8dac124d1e32a6f43a043301b545775f, type: 3}
@@ -486,11 +482,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5998781153942800346, guid: 8dac124d1e32a6f43a043301b545775f, type: 3}
       propertyPath: m_Name
-      value: ControlScrew_Prefab
+      value: HandBrake
       objectReference: {fileID: 0}
     - target: {fileID: 5998781154957515784, guid: 8dac124d1e32a6f43a043301b545775f, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998781154957515785, guid: 8dac124d1e32a6f43a043301b545775f, type: 3}
+      propertyPath: m_Name
+      value: HandBrake_Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 5998781154957515787, guid: 8dac124d1e32a6f43a043301b545775f, type: 3}
       propertyPath: proximity
@@ -731,20 +731,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 47253595245987172}
     m_Modifications:
     - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
+      propertyPath: UseEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: UseAnimator
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: autoDisable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: paramaterName
       value: EmerBrake
-      objectReference: {fileID: 0}
-    - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
-      propertyPath: TargetAnimator
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: SendingEvent.Array.size
@@ -764,12 +764,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: SendingEvent.Array.data[0]
-      value: CloseEmerBrake
+      value: EmerValveClose
       objectReference: {fileID: 0}
     - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: SendingEvent.Array.data[1]
-      value: OpenEmerBrake
+      value: EmerValveOpen
       objectReference: {fileID: 0}
+    - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
+      propertyPath: eventReceivers.Array.data[0]
+      value: 
+      objectReference: {fileID: 465120002127798918}
     - target: {fileID: -7727967090474897867, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: segment_points.Array.data[0]
       value: 0
@@ -789,6 +793,10 @@ PrefabInstance:
     - target: {fileID: 2641284816967498785, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: m_Radius
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641284816967498813, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
+      propertyPath: m_Name
+      value: EmerValve_Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 2641284816967498815, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: proximity
@@ -840,12 +848,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2641284818098694126, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       propertyPath: m_Name
-      value: ControlSlider_Prefab
+      value: EmerValve
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2641284818098694126, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3484246106363707064}
+    - targetCorrespondingSourceObject: {fileID: 2641284818098694126, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 465120002127798918}
     - targetCorrespondingSourceObject: {fileID: 2641284816967498813, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8866409278555738170}
@@ -864,6 +878,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2641284818098694033, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
   m_PrefabInstance: {fileID: 9006066504100518064}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6367037952749682526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2641284818098694126, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
+  m_PrefabInstance: {fileID: 9006066504100518064}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3484246106363707064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367037952749682526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e9b1e6a0f7eae41bb31d9b41424bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 465120002127798918}
+  EmerValveController: {fileID: 7510675026738230917}
+  brakeModule: {fileID: 90571359500683782}
+--- !u!114 &465120002127798918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367037952749682526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 1
+  serializedProgramAsset: {fileID: 11400000, guid: 8e92f44fa11c1db4eb62cf4eadb1099d, type: 2}
+  programSource: {fileID: 11400000, guid: 600eed06ff9339b4dbb879dc00ccbd04, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
 --- !u!1 &6367037953764385933 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2641284816967498813, guid: 0d17b369a3ce86544976cdcde25bb975, type: 3}
@@ -948,7 +1016,7 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2408356968344519135}
   targets:
-  - {fileID: 6615080559083420772}
+  - {fileID: 465120002127798918}
 --- !u!114 &2408356968344519135
 MonoBehaviour:
   m_ObjectHideFlags: 0
