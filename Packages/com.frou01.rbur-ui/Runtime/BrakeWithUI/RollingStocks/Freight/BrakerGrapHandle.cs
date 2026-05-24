@@ -11,7 +11,8 @@ using static VRC.SDKBase.VRCPlayerApi;
 public class BrakerGrapHandle : ControllerSlider_Pickup
 {
     [SerializeField] Transform stationTransform;
-    [SerializeField] Transform leverTransform;
+    [SerializeField] Transform indicateLeverTransform;
+    [SerializeField] float indicateLeverLength = 2.9f;
     Vector3 stationOrig;
     Quaternion leverOrig;
     [SerializeField] VRC.SDK3.Components.VRCStation station;
@@ -19,7 +20,7 @@ public class BrakerGrapHandle : ControllerSlider_Pickup
     protected override void Start()
     {
         stationOrig = stationTransform.localPosition;
-        leverOrig = leverTransform.localRotation;
+        leverOrig = indicateLeverTransform.localRotation;
         base.Start();
     }
 
@@ -35,7 +36,7 @@ public class BrakerGrapHandle : ControllerSlider_Pickup
         stationTransform.localPosition = stationOrig;
         stationTransform.Translate(0, -controllerPosition, 0);
 
-        leverTransform.localRotation = leverOrig;
-        leverTransform.Rotate(-Mathf.Rad2Deg * Mathf.Asin(controllerPosition/2.9f), 0, 0);
+        indicateLeverTransform.localRotation = leverOrig;
+        indicateLeverTransform.Rotate(-Mathf.Rad2Deg * Mathf.Asin(controllerPosition/indicateLeverLength), 0, 0);
     }
 }
