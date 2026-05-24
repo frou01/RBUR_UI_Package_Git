@@ -138,8 +138,6 @@ GACを介してブレーキパイプを開閉するための拡張スクリプ�
 RBUR.BrakeConnectorValveの内容を合わせて確認して下さい。
 
 ### 仕様
-
-このUdonでは同期を行わず、GACもSyncmodeをNoneとしてBrakeModuleの同期状態に従属して動作します。
 |設定値|概要|
 |---:|:---|
 GAC_Controller|開閉に用いるコントローラー
@@ -149,22 +147,18 @@ Close_Position|閉時の位置
 
 |関数|概要|同期|
 |---:|:---|:---|
-GAC_OpenPos|GACのイベント呼び出し機能で呼ぶ想定の、コック開時イベント受けです。|BrakeModule(Owner)から同期実施
-GAC_ClosePos|GACのイベント呼び出し機能で呼ぶ想定の、コック閉時イベント受けです。|BrakeModule(Owner)から同期実施
+GAC_OpenPos|GACのイベント呼び出し機能で呼ぶ想定の、コック開時イベント受けです。|Owner側イベントを呼び出し、Ownerから同期
+GAC_ClosePos|GACのイベント呼び出し機能で呼ぶ想定の、コック閉時イベント受けです。|Owner側イベントを呼び出し、Ownerから同期
 
 ## CouplerEventListener_ObjectToggle
 
-Couplerからのイベントを受けて、各種表示を行うイベントリスナー実装です。
+Couplerからのイベントを受けて、UtilのToggleを用いてモデル表示を行うイベントリスナー実装です。
+CouplerEventListenersに設定して用います。
 
 ### 仕様
-SyncedObject~を用いますが、SyncmodeをNoneとしてローカル動作としています。
+SyncedObject~を用いますが、SyncmodeをNoneとしてローカル動作としています。同期はCouplerObj側が担当しています。
 
 |設定値|概要|
 |---:|:---|
 ObjectToggle_Knuckle|ナックル開閉用のToggleです。
 SyncedObjectSwitch|錠状態の表示用スイッチです。
-
-
-|関数|概要|同期|
-|---:|:---|:---|
-|
