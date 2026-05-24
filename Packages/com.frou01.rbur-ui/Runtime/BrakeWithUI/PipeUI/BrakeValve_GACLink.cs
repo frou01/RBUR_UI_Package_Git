@@ -16,44 +16,21 @@ namespace frou01.RBUR_UI
         [SerializeField] float Open_Position;
         [SerializeField] float Close_Position;
 
-        public override void Init(Train train)
-        {
-            base.Init(train);
-            bool hasThisUB = false;
-            foreach (UdonBehaviour ub in brakeModule.indicateUdons)
-            {
-                if (ub == this.GetComponent<UdonBehaviour>())
-                {
-                    hasThisUB = true;
-                    break;
-                }
-            }
-            if (!hasThisUB)
-            {
-                UdonBehaviour[] newUBarr = new UdonBehaviour[brakeModule.indicateUdons.Length + 1];
-                brakeModule.indicateUdons.CopyTo(newUBarr, 0);
-                newUBarr[brakeModule.indicateUdons.Length] = this.GetComponent<UdonBehaviour>();
-                brakeModule.indicateUdons = newUBarr;
-            }
-        }
         public void GAC_OpenPos()
         {
             GAC_Controller.SetPosition(Open_Position);
-            this.OpenBrakeValve();
+            this.OpenValve();
         }
         public void GAC_ClosePos()
         {
             GAC_Controller.SetPosition(Close_Position);
-            this.CloseBrakeValve();
+            this.CloseValve();
         }
 
-        [NetworkCallable]
-        public void BrakeVavleUpdated(bool isFront, bool isOpen)
+        protected override void onUpdateConnectState()
         {
-            if (isFront == coupler.FrontOrBack)
-            {
-                GAC_Controller.SetPosition(isOpen ? Open_Position : Close_Position);
-            }
+            base.onUpdateConnectState();
+            GAC_Controller.SetPosition(OpenState ? Open_Position : Close_Position);
         }
     }
 }
