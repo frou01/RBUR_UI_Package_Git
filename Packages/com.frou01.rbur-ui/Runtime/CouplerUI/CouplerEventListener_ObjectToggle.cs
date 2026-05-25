@@ -12,7 +12,7 @@ namespace frou01.RBUR_UI
         [SerializeField] SyncedObjectToggle ObjectToggle_Knuckle;
         [SerializeField] SyncedObjectSwitch ObjectSwitch_Key;
         [NetworkCallable]
-        public void setKnucleState(bool knucleState)
+        public void setKnuckleState(bool knucleState)
         {
             ObjectToggle_Knuckle.setState(knucleState);
         }

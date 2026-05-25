@@ -5,8 +5,8 @@
   "unity": "2022.3",
   "description": "RBUR User Interfaces",
   "vpmDependencies": {
-    "com.frou01.rbur": ">=5.0.0",
-    "com.frou01.utils": ">=7.1.0",
+    "com.frou01.rbur": ">=5.1.0",
+    "com.frou01.utils": ">=8.0.0",
     "com.frou01.gac": ">=6.2.0"
   },
   "author": {

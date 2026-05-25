@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: AbstractJumpCableBoxTerminal
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: a2aff6968bcbd2a44867ea8f9f95c2d5, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: c323b7128ac3bd348a73cd0fd2112997, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: b48cb761321a80944abd052db6bb248c, type: 3}
