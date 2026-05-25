@@ -5,38 +5,16 @@ using UnityEngine;
 
 public class K_TripleValveAndFootBrake : K_TripleValve
 {
-    [SerializeField] Controller_Base EmerValve;
     [SerializeField] Controller_Screw HandBrakeScrew;
     [SerializeField] Controller_Base HandBrakeController;
-    protected int[] valvePos = new int[1];
     protected float[] handBrakeState = new float[1];
     [SerializeField] protected float handBrakePower = 10000;
     protected override void Start()
     {
         base.Start();
 
-        if (EmerValve != null) valvePos = EmerValve.currentSegment_Exposed;
-
         if (HandBrakeScrew != null) handBrakeState = HandBrakeScrew.normScrewPosition;
         else if (HandBrakeController != null) handBrakeState = HandBrakeController.currentNormalizePosition_Exposed;
-    }
-
-    public void OnDrop_()//EmerBrakeValve release
-    {
-        EmerValve.SetPosition(0);
-        EmerValve.RequestSerialization();
-    }
-    protected override void Update()
-    {
-        base.Update();
-    }
-    protected override void LateUpdate()
-    {
-        if (valvePos[0] == 1)
-        {
-            straightBrakePressure[0] = m_straightBrakePressure = 0.1f;
-        }
-        base.LateUpdate();
     }
 
     protected float temp_brake;
