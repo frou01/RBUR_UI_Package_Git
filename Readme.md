@@ -5,6 +5,7 @@ RBUR-UIはRBUR用の共通ユーザーインターフェースを実装するパ
 # 目次
 - [ビルドプロセス](#ビルドプロセス)
 - [コンポーネント](#コンポーネント)
+- [Prefab](#prefab)
 # ビルドプロセス
 
 # コンポーネント
@@ -63,15 +64,9 @@ DynamicFriction|動摩擦力[$\mathrm{N}$]
 DynamicFrictionSpeed|動摩擦移行速度[$\mathrm{m/s}$]<br>0~DynamicFrictionSpeedまで線形補間
 controlledWheel|ブレーキ力の表現に使う車軸(複数化)
 wheelMultiplier|ブレーキ倍率[$\mathrm{N/MPa}$]
-EmerValve|非常弁コントローラー。segment=1で制動管圧を解放、手を離すとposition=0に設定。
 HandBrakeScrew|手ブレーキ用ネジ。ScrewPosition(0-1)を参照
 HandBrakeController|手ブレーキ用コントローラー。NormalizePosition(0-1)を参照。手ブレーキ用ネジと両方設定した場合は手ブレーキ用ネジが優先して使われる。
 handBrakePower|手ブレーキ倍率。[$コントローラー入力*\mathrm{N}$]
-
-
-|関数|概要|同期|
-|---:|:---|:---|
-|OnDrop_|EmerValveのLinkerより呼び出し。EmerValveを復位する。|EmerValveが同期する
 
 ## K_TripleValveAndFootBrake
 
@@ -102,15 +97,9 @@ DynamicFriction|動摩擦力[$\mathrm{N}$]
 DynamicFrictionSpeed|動摩擦移行速度[$\mathrm{m/s}$]<br>0~DynamicFrictionSpeedまで線形補間
 controlledWheel|ブレーキ力の表現に使う車軸(複数化)
 wheelMultiplier|ブレーキ倍率[$\mathrm{N/MPa}$]
-EmerValve|非常弁コントローラー。segment=1で制動管圧を解放、手を離すとposition=0に設定。
 HandBrakeScrew|手ブレーキ用ネジ。ScrewPosition(0-1)を参照
 HandBrakeController|手ブレーキ用コントローラー。NormalizePosition(0-1)を参照。手ブレーキ用ネジと両方設定した場合は手ブレーキ用ネジが優先して使われる。
 handBrakePower|手ブレーキ倍率。[$コントローラー入力*\mathrm{N}$]
-
-
-|関数|概要|同期|
-|---:|:---|:---|
-|OnDrop_|EmerValveのLinkerより呼び出し。EmerValveを復位する。|EmerValveが同期する
 
 ## BrakerGrapHandle
 
@@ -150,6 +139,24 @@ Close_Position|閉時の位置
 GAC_OpenPos|GACのイベント呼び出し機能で呼ぶ想定の、コック開時イベント受けです。|Owner側イベントを呼び出し、Ownerから同期
 GAC_ClosePos|GACのイベント呼び出し機能で呼ぶ想定の、コック閉時イベント受けです。|Owner側イベントを呼び出し、Ownerから同期
 
+## EmerValve
+GACを介してBP管開放による非常制動を行うスクリプトです。
+
+同期をGACに任せ、有効無効切り替えでUpdateを起動/停止しています。
+
+### 仕様
+|設定値|概要|
+|---:|:---|
+EmerValveController|開閉に用いるコントローラー<br>segment=0:閉鎖、segment=1:開放
+brakeModule|制御の対象になるブレーキ装置
+
+
+|関数|概要|同期|
+|---:|:---|:---|
+OnDrop_|GACを手から落とした際のイベント。復位に使用。|GAC側が実施
+EmerValveClose|閉鎖時イベント|GAC側が実施
+EmerValveOpen|解放時イベント|GAC側が実施
+
 ## CouplerEventListener_ObjectToggle
 
 Couplerからのイベントを受けて、UtilのToggleを用いてモデル表示を行うイベントリスナー実装です。
@@ -162,3 +169,28 @@ SyncedObject~を用いますが、SyncmodeをNoneとしてローカル動作と�
 |---:|:---|
 ObjectToggle_Knuckle|ナックル開閉用のToggleです。
 SyncedObjectSwitch|錠状態の表示用スイッチです。
+
+# Prefab 
+
+## GAC_BrakeConnectorValve
+
+GACを用いてブレーキコックを操作するためのPrefabです。
+
+### 仕様
+Coupler下に入れる事でビルド時に各種参照が自動構築されます。
+
+## PassCarController
+
+客車向けのコントローラー群です。
+
+### 仕様
+TrainのGameObject下に入れることで、ビルド時に一部参照が自動構築されます。
+ControlledWheelとWheelMultiplierは自身で設定して下さい。
+
+## Uncoupler
+
+GACを用いたカプラーの開放装置です。
+
+### 仕様
+
+Controller_PickupのEventReceiversにCouplerObjを設定することで、イベントを呼び出し動作します。
