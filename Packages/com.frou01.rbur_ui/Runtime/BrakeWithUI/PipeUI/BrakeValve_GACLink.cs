@@ -25,11 +25,15 @@ namespace frou01.RBUR_UI
         public void GAC_OpenPos()
         {
             GAC_Controller.SetPosition(Open_Position);
+            GAC_Controller.OnDrop();
+            GAC_Controller.GetComponent<VRC_Pickup>().Drop();
             this.OpenValve();
         }
         public void GAC_ClosePos()
         {
             GAC_Controller.SetPosition(Close_Position);
+            GAC_Controller.OnDrop();
+            GAC_Controller.GetComponent<VRC_Pickup>().Drop();
             this.CloseValve();
         }
 
