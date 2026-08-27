@@ -488,6 +488,10 @@ PrefabInstance:
       value: 0.1897375
       objectReference: {fileID: 0}
     - target: {fileID: 3765030547202587564, guid: 3d4b452f8bdc0f147b904dbcb53844a0, type: 3}
+      propertyPath: UseAnimator
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765030547202587564, guid: 3d4b452f8bdc0f147b904dbcb53844a0, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 3765030547202587564, guid: 3d4b452f8bdc0f147b904dbcb53844a0, type: 3}
