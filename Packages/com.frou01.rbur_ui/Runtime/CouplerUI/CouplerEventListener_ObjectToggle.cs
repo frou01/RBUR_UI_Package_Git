@@ -14,13 +14,13 @@ namespace frou01.RBUR_UI
         [NetworkCallable]
         public void setKnuckleState(bool knucleState)
         {
-            ObjectToggle_Knuckle.setState(knucleState);
+            if(ObjectToggle_Knuckle) ObjectToggle_Knuckle.setState(knucleState);
         }
         [NetworkCallable]
-        public void setKeyState(int knucleState)
+        public void setKeyState(int keyState)
         {
 
-            ObjectSwitch_Key.setState(knucleState);
+            if(ObjectSwitch_Key) ObjectSwitch_Key.setState(keyState);
         }
         public void OnOpening()
         {
