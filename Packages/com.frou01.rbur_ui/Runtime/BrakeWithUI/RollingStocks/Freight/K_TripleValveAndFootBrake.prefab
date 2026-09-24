@@ -105,7 +105,7 @@ MonoBehaviour:
   brake_sensitivity: 0.03
   emer_sensitivity: 0.1
   emer_sensitivity_2: 0.12
-  StaticFriction: 1020
+  StaticFriction: 510
   DynamicFriction: 61
   DynamicFrictionSpeed: 0.5
   controlledWheel:
