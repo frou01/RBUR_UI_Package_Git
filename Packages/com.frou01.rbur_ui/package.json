@@ -1,13 +1,13 @@
 {
   "name": "com.frou01.rbur_ui",
   "displayName": "frou01.RBUR_UserInterface",
-  "version": "1.0.0",
+  "version": "2.0.0-pre1.0",
   "unity": "2022.3",
   "description": "RBUR User Interfaces",
   "vpmDependencies": {
     "com.frou01.rbur": ">=5.1.0",
     "com.frou01.utils": ">=8.0.0",
-    "com.frou01.gac": ">=6.2.0"
+    "com.frou01.gac": ">=8.1.0"
   },
   "author": {
     "name": "frou01",
